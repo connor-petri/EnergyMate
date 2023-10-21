@@ -1,0 +1,29 @@
+.navBox {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+.navItem {
+    background-image: linear-gradient(135deg, #ABDCFF 10%, #0396FF 100%);
+    border-radius: 8px;
+    color: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.navItemLabel {
+    font-size: 20px;
+}
+
+.navItemValue {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.navItem:nth-child(2) {
+    background-image: linear-gradient(135deg, #CE9FFC 10%, #7367F0 100%);
+}
