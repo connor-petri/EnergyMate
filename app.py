@@ -166,10 +166,23 @@ def get_data():
             return jsonify(response_data), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
-# @app.route('/delete_db_info')
-# def delete_db_info():
-#     try:
-#
-if __name__ == '__main__':
+@app.route('/delete_db_info')
+def delete_db_info():
+    try:
+        with app.app_context():
+            result = db.session.execute(db.select(plugDataPoint).order_by(plugDataPoint.id))
+            all_plugDataPoints = result.scalars()
+            for dataPoint in all_plugDataPoints:
+                db.session.delete(dataPoint)
+            db.session.commit()
+            return "Database cleared"
 
+    except Exception as e:
+        return str(e)
+
+
+
+
+if __name__ == '__main__':
+    print(__name__)
     app.run(debug=True)
