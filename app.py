@@ -37,15 +37,14 @@ def send_data():
         # You can perform any necessary processing hereData
         # For example, you can store the data in a database or log it
         #Data Query
-        with app.app_context():
-            plug = db.session.execute(db.select(plugDataPoint).where(plugDataPoint.id == 1)).scalar()
+
 
         # Return a response
         response_data = {
-            'plugid': plug.plugid,
-            'wattage': plug.wattage,
+            'plugid': plugid,
+            'wattage': wattage,
 
-            'timestamp': plug.timestamp
+            'timestamp': timestamp
         }
         with app.app_context():
             new_datapoint = plugDataPoint( plugid=plugid, wattage=wattage, timestamp=timestamp)
@@ -55,6 +54,17 @@ def send_data():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+@app.route("/display_db_data")
+def display_data():
+    with app.app_context():
+        plug = db.session.execute(db.select(plugDataPoint).where(plugDataPoint.id == 1)).scalar()
+        # Return a response
+        response_data = {
+            'plugid': plug.plugid,
+            'wattage': plug.wattage,
 
+            'timestamp': plug.timestamp
+        }
+        return jsonify(response_data), 200
 if __name__ == '__main__':
     app.run(debug=True)
