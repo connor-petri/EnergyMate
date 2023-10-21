@@ -15,6 +15,8 @@ Welcome to the ESP32 IoT project repository! This project combines the power of 
 
 This project is aimed at creating a comprehensive IoT solution using the ESP32 microcontroller. The project includes simulations in Proteus, Arduino code for ESP32, a Python3 Flask web server, Git for version control, Postman for API testing, DigitalOcean for cloud deployment, MySQL for database management, and SQLAlchemy for seamless integration between Python and MySQL.
 
+![alt text](Hardware-Circuit/Schematic_EnergyMate_2023-10-21.png)
+
 ## Requirements
 
 Make sure you have the following tools and technologies installed:
