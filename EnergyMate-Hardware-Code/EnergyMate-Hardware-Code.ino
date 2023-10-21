@@ -10,12 +10,21 @@
  */
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include <ArduinoJson.h>  // Include the ArduinoJson library
 
 const char *ssid = "inky";
 const char *password = "summer0712";
-const char *apiUrl = "http://137.184.231.21:5000/send_data";
+const char *API_KEY = "F68SA3LCFQGUNYD7";
+const char *apiUrl = "https://api.thingspeak.com/update";
 int relayPin = 4;
 int currentSensor = 6;
+
+int field3 = 0;
+const float electricityRate = 0.20;  // Replace with your actual electricity rate in $/kWh
+float totalCost = 0.0;
+
+unsigned long myTime;
+
 
 void connectToWiFi() {
   WiFi.begin(ssid, password);
@@ -28,11 +37,65 @@ void connectToWiFi() {
   Serial.println("Connected to WiFi");
 }
 
-void sendDataToThingSpeak(int plugid, int wattage) {
+
+void calculateCost(int relayState, int powerConsumption, int timeInHours) {
+  // If relay is ON, calculate energy consumption and cost
+  if (relayState == HIGH) {
+    float energyConsumption = (powerConsumption * timeInHours) / 1000.0;  // Energy in kWh
+    float cost = energyConsumption * electricityRate;
+
+    Serial.print("Energy Consumption: ");
+    Serial.print(energyConsumption);
+    Serial.print(" kWh, Cost: $");
+    Serial.println(cost);
+
+   totalCost += cost;
+  } else {
+    Serial.println("Relay is OFF. No energy consumption.");
+  }
+  
+}
+// void readDataThing() {
+//   HTTPClient http1;
+
+//   String url = "https://api.thingspeak.com/channels/2314358/fields/3.json?results=1";
+
+//   Serial.println(url);
+//   http1.begin(url);
+//   int httpResponseCode = http1.GET();
+
+//   if (httpResponseCode == 200) {
+//     DynamicJsonDocument jsonDocument(1024);  // Adjust the size based on your JSON response
+//     DeserializationError error = deserializeJson(jsonDocument, http1.getString());
+
+//     if (error) {
+//       Serial.println("Error parsing JSON");
+//       return;
+//     }
+
+//     // Check if "feeds" array is not empty
+//     if (jsonDocument["feeds"].size() > 0) {
+//       // Extract the "field3" value
+//       String field3Value = jsonDocument["feeds"][0]["field3"].as<String>();
+//       if (field3Value == "2") {
+//         controlRelay(1);
+
+//       } else {
+//         controlRelay(0);
+//       }
+//     }
+//   } else {
+//     Serial.print("Error on ThingSpeak request. HTTP Response code: ");
+//     Serial.println(httpResponseCode);
+//   }
+//   http1.end();
+// }
+void sendDataToThingSpeak(int wattage, int deviceid, int state, double money) {
   HTTPClient http;
+  // readDataThing();
 
-  String url = String(apiUrl) + "?plugid=" + String(plugid) + "&wattage=" + String(wattage);
-
+  String url = String(apiUrl) + "?api_key=" + String(API_KEY) + "&field1=" + String(wattage) + "&field2=" + String(deviceid) + "&field3=" + String(state) + "&field4=" + String(money);
+  digitalWrite(relayPin, state);
   Serial.println(url);
   http.begin(url);
 
@@ -48,20 +111,31 @@ void sendDataToThingSpeak(int plugid, int wattage) {
   http.end();
 }
 
+void controlRelay(int relayState) {
+  digitalWrite(relayPin, relayState);
+  Serial.print("Relay State: ");
+  Serial.println(relayState == HIGH ? "ON" : "OFF");
+  delay(200);
+}
 void setup() {
   Serial.begin(115200);
   Serial.println("EnergyMate Started");
   pinMode(relayPin, OUTPUT);
   pinMode(currentSensor, INPUT);
   digitalWrite(relayPin, 1);
-  
+
   connectToWiFi();
 }
 
 void loop() {
   // int wattageVal = analogRead(currentSensor * 1.4);
-  int wattageVal = random(50,60);
+  myTime = millis();
+  int wattageVal = random(50, 60);
+  float sumcost = myTime/3600;
+  calculateCost(HIGH, 50, sumcost);
+  
 
-  sendDataToThingSpeak(1, wattageVal);
-  delay(15000);  
+  sendDataToThingSpeak(wattageVal, 1, 1, sumcost/100);
+
+  delay(15000);
 }
