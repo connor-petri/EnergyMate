@@ -36,7 +36,6 @@ Make sure you have the following tools and technology installed:
 ## Big Roadblocks we encountered and overcame.
 ### SQLite Unable to be connected with our DigitalOcean Server.
 ### Had to scale down the project several times.
-We began planning our 
 ## Installation
 
 1. Clone the repository:
