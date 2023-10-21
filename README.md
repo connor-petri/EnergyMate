@@ -1,12 +1,14 @@
-# ESP32 IoT Project
+# ESP32 IoT Hackathon Project
 
-Welcome to the ESP32 IoT project repository! This project combines the power of ESP32 microcontrollers, Proteus simulation, Arduino programming, Git version control, Postman for API testing, and DigitalOcean for cloud deployment.
+Welcome to the ESP32 IoT project repository! This project combines the power of ESP32 microcontrollers, Proteus simulation, Arduino programming, Git version control, Postman for API testing, and DigitalOcean for cloud deployment. This was all done and made during the DA Hacks 2023 Hackathon from 10/20/2023 to 10/21/2023.
+
 
 ## Table of Contents
 
 - [Introduction](#introduction)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Goals](#goals)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -16,16 +18,18 @@ Welcome to the ESP32 IoT project repository! This project combines the power of 
 This project is aimed at creating a comprehensive IoT solution using the ESP32 microcontroller. The project includes simulations in Proteus, Arduino code for ESP32, Git for version control, Postman for API testing, and DigitalOcean for reliable cloud deployment.
 
 ![alt text](Hardware-Circuit/Schematic_EnergyMate_2023-10-21.png)
+![alt text](https://github.com/connor-petri/EnergyMate/assets/102274279/5b930443-76ce-4dbc-91b1-28276854626b)
 
 ## Requirements
 
-Make sure you have the following tools and technologies installed:
+Make sure you have the following tools and technology installed:
 
 - [Arduino IDE](https://www.arduino.cc/en/software)
 - [Proteus](https://www.labcenter.com/)
 - [Git](https://git-scm.com/)
 - [Postman](https://www.postman.com/)
 - [DigitalOcean Account](https://www.digitalocean.com/)
+- [ThingSpeak API](https://thingspeak.com/)
 
 ## Installation
 
@@ -39,9 +43,6 @@ Make sure you have the following tools and technologies installed:
 
 3. Install required Python packages:
 
-   ```bash
-   pip install Flask SQLAlchemy
-   ```
 
 4. Set up MySQL database and configure SQLAlchemy connection.
 
