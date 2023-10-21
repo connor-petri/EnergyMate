@@ -76,7 +76,7 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
 app = Flask(__name__)
-date_time = datetime.now()
+
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
 
 # CONNECT TO DB
@@ -99,6 +99,9 @@ with app.app_context():
 @app.route('/send_data', methods=['GET'])
 def send_data():
     try:
+        global app
+        global db
+        date_time = datetime.now()
         # Get parameters from the request
         plugid = request.args.get('plugid')
         wattage = request.args.get('wattage')
@@ -127,6 +130,8 @@ def send_data():
 @app.route("/get_data")
 def get_data():
     try:
+        global app
+        global db
         wattage_sum = 0
         # Get parameters from the request
         plugid = request.args.get('plugid')
@@ -161,5 +166,10 @@ def get_data():
             return jsonify(response_data), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+# @app.route('/delete_db_info')
+# def delete_db_info():
+#     try:
+#
 if __name__ == '__main__':
+
     app.run(debug=True)
