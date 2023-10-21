@@ -1,8 +1,10 @@
 import sqlite3
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import DeclarativeBase
 app = Flask(__name__)
 date_time = datetime.now()
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
@@ -32,15 +34,18 @@ def send_data():
         wattage = request.args.get('wattage')
         timestamp = date_time.strftime("%m-%d-%Y@%H:%M:%S")
 
-        # You can perform any necessary processing here
+        # You can perform any necessary processing hereData
         # For example, you can store the data in a database or log it
+        #Data Query
+        with app.app_context():
+            plug = db.session.execute(db.select(plugDataPoint).where(plugDataPoint.id == 1)).scalar()
 
         # Return a response
         response_data = {
-            'plugid': plugid,
-            'wattage': wattage,
+            'plugid': plug.plugid,
+            'wattage': plug.wattage,
 
-            'timestamp': timestamp
+            'timestamp': plug.timestamp
         }
         with app.app_context():
             new_datapoint = plugDataPoint( plugid=plugid, wattage=wattage, timestamp=timestamp)
