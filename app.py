@@ -32,7 +32,7 @@ def send_data():
         # Get parameters from the request
         plugid = request.args.get('plugid')
         wattage = request.args.get('wattage')
-        timestamp = date_time.strftime("%m-%d-%Y@%H:%M:%S")
+        timestamp = date_time.strftime("%Y-%m-%d@%H:%M:%S")
 
         # You can perform any necessary processing hereData
         # For example, you can store the data in a database or log it
@@ -54,17 +54,42 @@ def send_data():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 400
-@app.route("/display_db_data")
-def display_data():
-    with app.app_context():
-        plug = db.session.execute(db.select(plugDataPoint).where(plugDataPoint.id == 1)).scalar()
-        # Return a response
-        response_data = {
-            'plugid': plug.plugid,
-            'wattage': plug.wattage,
+@app.route("/get_data")
+def get_data():
+    try:
+        wattage_sum = 0
+        # Get parameters from the request
+        plugid = request.args.get('plugid')
+        end_time = datetime.strptime(request.args.get('end_time'),"%Y-%m-%d@%H:%M:%S")
+        start_time = datetime.strptime(request.args.get('start_time'),"%Y-%m-%d@%H:%M:%S")
+        print(f"endtime = {end_time}, starttime = {start_time}")
 
-            'timestamp': plug.timestamp
-        }
-        return jsonify(response_data), 200
+
+
+        with app.app_context():
+
+            result = db.session.execute(db.select(plugDataPoint).where(plugDataPoint.plugid == plugid))
+
+            all_plugDataPoints = result.scalars()
+            for dataPoint in all_plugDataPoints:
+                print(f"endtime = {end_time},starttime = {start_time} ")
+                if(dataPoint.plugid == int(plugid)):
+                    print(f"Inside plugid statement.....endtime = {end_time},starttime = {start_time} ")
+                    print(f"Inside plugid statement datapoint time = {datetime.strptime(dataPoint.timestamp, '%Y-%m-%d@%H:%M:%S')}")
+                    #plugTime = datetime.strptime(request.args.get('timestamp'),"%Y-%m-%d@%H:%M:%S")
+                    plugTime = datetime.strptime(dataPoint.timestamp, "%Y-%m-%d@%H:%M:%S")
+                    print(f"plugtime = {plugTime}")
+                    if( plugTime <= end_time and plugTime >= start_time):
+                        print(f"Inside plugtime statement.....endtime = {end_time},starttime = {start_time} ")
+                        wattage_sum += dataPoint.wattage
+
+                    # Return a response
+                    response_data = {
+                        'plugid': plugid,
+                        'wattage_Sum': wattage_sum
+                    }
+            return jsonify(response_data), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 if __name__ == '__main__':
     app.run(debug=True)
