@@ -55,44 +55,9 @@ void calculateCost(int relayState, int powerConsumption, int timeInHours) {
   }
   
 }
-// void readDataThing() {
-//   HTTPClient http1;
 
-//   String url = "https://api.thingspeak.com/channels/2314358/fields/3.json?results=1";
-
-//   Serial.println(url);
-//   http1.begin(url);
-//   int httpResponseCode = http1.GET();
-
-//   if (httpResponseCode == 200) {
-//     DynamicJsonDocument jsonDocument(1024);  // Adjust the size based on your JSON response
-//     DeserializationError error = deserializeJson(jsonDocument, http1.getString());
-
-//     if (error) {
-//       Serial.println("Error parsing JSON");
-//       return;
-//     }
-
-//     // Check if "feeds" array is not empty
-//     if (jsonDocument["feeds"].size() > 0) {
-//       // Extract the "field3" value
-//       String field3Value = jsonDocument["feeds"][0]["field3"].as<String>();
-//       if (field3Value == "2") {
-//         controlRelay(1);
-
-//       } else {
-//         controlRelay(0);
-//       }
-//     }
-//   } else {
-//     Serial.print("Error on ThingSpeak request. HTTP Response code: ");
-//     Serial.println(httpResponseCode);
-//   }
-//   http1.end();
-// }
 void sendDataToThingSpeak(int wattage, int deviceid, int state, double money) {
   HTTPClient http;
-  // readDataThing();
 
   String url = String(apiUrl) + "?api_key=" + String(API_KEY) + "&field1=" + String(wattage) + "&field2=" + String(deviceid) + "&field3=" + String(state) + "&field4=" + String(money);
   digitalWrite(relayPin, state);
