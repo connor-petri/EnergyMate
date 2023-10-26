@@ -128,9 +128,8 @@ void setup() {
 }
 
 void loop() {
-  // int wattageVal = analogRead(currentSensor * 1.4);
+  int wattageVal = analogRead(currentSensor * 1.4);
   myTime = millis();
-  int wattageVal = random(50, 60);
   float sumcost = myTime/3600;
   calculateCost(HIGH, 50, sumcost);
   
