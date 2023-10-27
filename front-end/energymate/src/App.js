@@ -1,9 +1,20 @@
 import React from "react";
 import './App.css'; // Import your CSS file
+import Signin from './pages/signin';
 
 function App() {
   return (
     <div className="App">
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/signin">Sign In</a></li>
+          <li><a href="/signup">Sign Up</a></li>
+          <li><a href="#chart3">Chart 3</a></li>
+          <li><a href="#chart4">Chart 4</a></li>
+        </ul>
+      </nav>
+
       <div className="embed">
         <h1 id="h1">Energy Mate</h1>
         <iframe
