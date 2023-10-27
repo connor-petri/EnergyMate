@@ -1,0 +1,27 @@
+.page {
+
+    text-align: center;
+    padding: 20px;
+    background-color: #2ecc71; /* Green background color */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(12px + 2vmin); /* Adjusted font size */
+
+}
+
+p {
+
+}
+
+
+@media only screen and (max-width: 600px) {
+    .item {
+      background-color: #3498db; /* Blue background color for small screens */
+      color: #fff; /* White text color */
+      width: 100%;
+    }
+  }
+  
