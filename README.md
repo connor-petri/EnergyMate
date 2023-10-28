@@ -4,7 +4,6 @@ Winner of De Anza Hacks 2023!
 
 Welcome to the ESP32 IoT project repository! This project combines the power of ESP32 microcontrollers, Proteus simulation, Arduino programming, Git version control, Postman for API testing, and DigitalOcean for cloud deployment. This was all done and made during the DA Hacks 2023 Hackathon from 10/20/2023 to 10/21/2023.
 
-# [Demo](http://67.148.60.86)
 
 ## Table of Contents
 
@@ -44,7 +43,7 @@ Make sure you have the following tools and technology installed:
 1. Clone the repository:
 
    ```bash
-   [git clone https://github.com/your-username/esp32-iot-project.git](https://github.com/connor-petri/EnergyMate)
+   [git clone https://github.com/connor-petri/EnergyMate.git](https://github.com/connor-petri/EnergyMate)
    ```
 
 2. Set up Arduino IDE for ESP32 development.
