@@ -1,4 +1,5 @@
-# EnergyMate - help you reduce electricity cost
+# EnergyMate
+## Electricity consumption reducer IoT solution -- Help you reduce electricity bill!
 
 Winner of De Anza Hacks 2023!
 
@@ -19,10 +20,8 @@ Welcome to the ESP32 IoT project repository! This project combines the power of 
 
 This project is aimed at creating a comprehensive IoT solution using the ESP32 microcontroller. The project includes simulations in Proteus, Arduino code for ESP32, Git for version control, Postman for API testing, and DigitalOcean for reliable cloud deployment.
 
-![alt text](Hardware-Circuit/Schematic_EnergyMate_2023-10-21.png)
-![alt text](https://github.com/connor-petri/EnergyMate/assets/102274279/5b930443-76ce-4dbc-91b1-28276854626b)
-![alt text](https://github.com/connor-petri/EnergyMate/assets/102274279/6e22e5d7-3c82-4f13-8091-ae35825904d3)
-![alt text](https://github.com/connor-petri/EnergyMate/assets/102274279/a3f47a45-ff10-4e1d-b6e7-d0b953e284ad)
+![alt text](images/project-view.jpg)
+![alt text](images/soldering.jpg)
 
 
 ## Requirements
@@ -55,6 +54,15 @@ Our current mission is to increase awareness about the financial aspects related
 
 ### Long-Term Goal
 Our grand, long-term vision is to make a significant contribution to the global battle against climate change. We're striving to achieve this by providing a groundbreaking and effective approach to conserving electricity. In the process, our aim is to be a part of the solution that helps safeguard the Earth's invaluable resources, promoting sustainability and ensuring a healthy environment for generations to come.
+
+## Gallery
+
+
+![alt text](Hardware-Circuit/Schematic_EnergyMate_2023-10-21.png)
+![alt text](https://github.com/connor-petri/EnergyMate/assets/102274279/5b930443-76ce-4dbc-91b1-28276854626b)
+![alt text](https://github.com/connor-petri/EnergyMate/assets/102274279/6e22e5d7-3c82-4f13-8091-ae35825904d3)
+![alt text](https://github.com/connor-petri/EnergyMate/assets/102274279/a3f47a45-ff10-4e1d-b6e7-d0b953e284ad)
+
 
 ## Usage
 
