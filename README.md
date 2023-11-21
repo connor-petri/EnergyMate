@@ -1,4 +1,4 @@
-# ESP32 IoT Hackathon Project
+# EnergyMate - help you reduce electricity cost
 
 Winner of De Anza Hacks 2023!
 
